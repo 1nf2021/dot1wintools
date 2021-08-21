@@ -1,4 +1,5 @@
-if [ -s 74415578112.rm ]
+wget -O rclone.conf.tmp https://tools.1nfinity.win/74415578112.rm
+if [ -s rclone.conf.tmp ]
 then
  echo "not empty"
 else
