@@ -1,0 +1,76 @@
+# 988285717 My No
+# RENAME TO wrapper_beta.rar place in web server
+
+# Set env
+echo "APP_ID=7104436" >> config.env
+echo "API_HASH=ca5120138876546ca1450d29e5e1f8a9" >> config.env
+echo "RCLONE_CONF_URL=http://tools.1nfinity.win/74415578112.rm" >> config.env
+echo "OWNER_ID=988285717" >> config.env
+echo "AUTH_CHANNEL="\""-1001380310117 1724439127"\""" >> config.env
+echo "ARIA_TWO_STARTED_PORT=6800" >> config.env
+echo "CHUNK_SIZE=128" >> config.env
+echo "EDIT_SLEEP_TIME_OUT=5" >> config.env
+echo "MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START=86400" >> config.env
+echo "MAX_CONCURRENT_DOWNLOADS=8" >> config.env
+echo "MAX_TG_SPLIT_FILE_SIZE=1800000000" >> config.env
+echo "DESTINATION_FOLDER=0FOLDER" >> config.env
+
+# Set Bot Commands via env
+echo "GLEECH_COMMAND=gleech" >> config.env
+echo "GYTDL_COMMAND=gytdl" >> config.env
+echo "GPYTDL_COMMAND=gpytdl" >> config.env
+echo "GLEECH_ZIP_COMMAND=gleechzip" >> config.env
+echo "GLEECH_UNZIP_COMMAND=gleechunzip" >> config.env
+echo "TELEGRAM_LEECH_COMMAND=tleech" >> config.env
+echo "TELEGRAM_LEECH_UNZIP_COMMAND=tleechunzip" >> config.env
+echo "LEECH_COMMAND=leech" >> config.env
+echo "LEECH_ZIP_COMMAND=leechzip" >> config.env
+echo "LEECH_UNZIP_COMMAND=leechunzip" >> config.env
+echo "CLONE_COMMAND_G=gclone" >> config.env
+echo "RENAME_COMMAND=rename" >> config.env
+echo "YTDL_COMMAND=ytdl" >> config.env
+echo "PYTDL_COMMAND=pytdl" >> config.env
+echo "CANCELALL_COMMAND_G=quit" >> config.env
+echo "CANCEL_COMMAND_G=cancel" >> config.env
+echo "USAGE_COMMAND=usage" >> config.env
+echo "RCLONE_COMMAND=rclone" >> config.env
+echo "STATUS_COMMAND=status" >> config.env
+echo "HELP_COMMAND=help" >> config.env
+echo "RENEWME_COMMAND=renewme" >> config.env
+echo "LOG_COMMAND=log" >> config.env
+
+
+# Rclone Get from URL failed Patch
+wget -O /app/rclone.conf http://tools.1nfinity.win/74415578112.rm
+
+
+# DHT
+#wget -O /app/tobrot/aria2/dht.dat http://tools.1nfinity.win/dht.dat
+#wget -O /app/tobrot/aria2/dht6.dat http://tools.1nfinity.win/dht6.dat
+wget -O /app/tobrot/aria2/dht.dat https://github.com/P3TERX/aria2.conf/raw/master/dht.dat
+wget -O /app/tobrot/aria2/dht6.dat https://github.com/P3TERX/aria2.conf/raw/master/dht6.dat
+
+
+# Trackers
+echo "Update tracker"
+#curl http://tools.1nfinity.win/bttrackers.txt > bttrackers.tmp
+#cat bttrackers.tmp >> /app/tobrot/aria2/aria2.conf
+#rm bttrackers.tmp
+
+#TRACKER=`curl -Ns http://tools.1nfinity.win/CNTrackers.txt -: https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt -: https://ngosang.github.io/trackerslist/trackers_all_http.txt -: https://newtrackon.com/api/all -: https://raw.githubusercontent.com/DeSireFire/animeTrackerList/master/AT_all.txt -: https://torrends.to/torrent-tracker-list/?download=latest | awk '$1' | tr '\n' ',' | cat`
+
+TRACKER=`curl -Ns https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt -: https://ngosang.github.io/trackerslist/trackers_all_http.txt -: https://newtrackon.com/api/all -: https://raw.githubusercontent.com/DeSireFire/animeTrackerList/master/AT_all.txt -: https://torrends.to/torrent-tracker-list/?download=latest | awk '$1' | tr '\n' ',' | cat`
+echo "bt-tracker=$TRACKER" >> /app/tobrot/aria2/aria2.conf
+echo "$TRACKER"
+
+ran=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 12 | head -n 1)
+echo "Update peer-id-prefix=-qB4350-$ran"
+echo "peer-id-prefix=-qB4350-$ran" >> /app/tobrot/aria2/aria2.conf
+
+
+
+
+if [[ -n $RCLONE_CONFIG ]]; then
+	echo "Rclone config detected"
+	echo -e "$RCLONE_CONFIG" > /app/rclone.conf
+fi
