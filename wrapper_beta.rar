@@ -4,7 +4,8 @@
 # Set env
 echo "APP_ID=7104436" >> config.env
 echo "API_HASH=ca5120138876546ca1450d29e5e1f8a9" >> config.env
-#echo "RCLONE_CONF_URL=https://tools.1nfinity.win/74415578112.rm" >> config.env
+#RCLONE_CONF_URL NO LONGER IN USE
+#echo "RCLONE_CONF_URL=http://tools.1nfinity.win/74415578112.rm" >> config.env
 echo "OWNER_ID=988285717" >> config.env
 echo "AUTH_CHANNEL="\""-1001380310117 1724439127"\""" >> config.env
 echo "ARIA_TWO_STARTED_PORT=6800" >> config.env
@@ -38,10 +39,6 @@ echo "STATUS_COMMAND=status" >> config.env
 echo "HELP_COMMAND=help" >> config.env
 echo "RENEWME_COMMAND=renewme" >> config.env
 echo "LOG_COMMAND=log" >> config.env
-
-
-# TEMP
-wget -O /app/tobrot/__init__.py http://tools.1nfinity.win/init.py
 
 
 # Rclone Get from URL failed Patch
