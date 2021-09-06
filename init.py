@@ -143,6 +143,18 @@ user_settings = defaultdict(lambda: {})
 gid_dict = defaultdict(lambda: [])
 _lock = asyncio.Lock()
 
+# Rclone Config Via any raw url
+###########################################################################
+try:                                                                      #
+    RCLONE_CONF_URL = os.environ.get('RCLONE_CONF_URL', "")               #
+    if len(RCLONE_CONF_URL) == 0:                                         #
+        RCLONE_CONF_URL = None                                            #
+    else:                                                                 #
+        urllib.request.urlretrieve(RCLONE_CONF_URL, '/app/rclone.conf')   #
+except KeyError:                                                          #
+    RCLONE_CONF_URL = None                                                #
+###########################################################################
+
 def multi_rclone_init():
     if RCLONE_CONFIG:
         LOGGER.warning("Don't use this var now, put your rclone.conf in root directory")
